@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Form.css';
 
-class form extends Component {
+class Form extends Component {
   constructor() {
     super();
     this.state = {
@@ -16,7 +16,7 @@ class form extends Component {
           type='text'
           placeholder='City'
           name='city'
-          value='{this.state.city}'
+          value={this.state.city}
         />
 
         <button>SUBMIT</button>
@@ -26,4 +26,4 @@ class form extends Component {
 }
 
 
-export default Form;
+export default Form

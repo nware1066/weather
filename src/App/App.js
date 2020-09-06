@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import Form from './Form';
-import AllWeather from './AllWeather';
+import Form from '../Form/Form';
 import './App.css';
 
 class App extends Component {
   constructor() {
-    super() {
+    super()
       this.state = {
         weather: []
-      }
 
     }
   }
@@ -16,11 +14,12 @@ class App extends Component {
     render() {
       return (
         <main className='App'>
+          <h1>Hello</h1>
+          <Form />
         </main>
 
       )
     }
-  )
 }
 
 
