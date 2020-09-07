@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { fetchCurrentWeather } from '../ApiCalls/ApiCalls'
 import './Form.css';
 
 class Form extends Component {
@@ -9,8 +10,15 @@ class Form extends Component {
     }
   }
 
-  handleChange = event => {
+  handleInputChange = event => {
     this.setState({ city: event.target.value })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const promise = fetchCurrentWeather(this.state.city);
+    promise.then(weather => this.props.updateWeather(weather))
+    // promise.then(weather => props.updateWeather(weather));
   }
 
   render() {
@@ -21,10 +29,10 @@ class Form extends Component {
           placeholder='City'
           name='city'
           value={this.state.city}
-          onChange={event => this.handleChange(event)}
+          onChange={event => this.handleInputChange(event)}
         />
 
-        <button>SUBMIT</button>
+        <button className='submit-button' onClick={ event => this.handleSubmit(event)}>SUBMIT</button>
       </form>
     )
   }
