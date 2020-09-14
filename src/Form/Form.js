@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { fetchCurrentWeather, fetchWeatherForcast} from '../ApiCalls/ApiCalls'
 import './Form.css';
 
 class Form extends Component {
@@ -9,9 +10,27 @@ class Form extends Component {
     }
   }
 
-  handleChange = event => {
+  handleInputChange = event => {
     this.setState({ city: event.target.value })
   }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.submitCurrentWeather();
+    this.submitWeatherForcast();
+  }
+
+  submitCurrentWeather = () => {
+    const promise = fetchCurrentWeather(this.state.city);
+    promise.then(weather => this.props.updateWeather(weather))
+  }
+
+  submitWeatherForcast = () => {
+    const promise = fetchWeatherForcast(this.state.city);
+    promise.then(forcast => this.props.updateForcast(forcast))
+  }
+
+  // refactor to DRY code for submit functions
 
   render() {
     return (
@@ -21,10 +40,10 @@ class Form extends Component {
           placeholder='City'
           name='city'
           value={this.state.city}
-          onChange={event => this.handleChange(event)}
+          onChange={event => this.handleInputChange(event)}
         />
 
-        <button>SUBMIT</button>
+        <button className='submit-button' onClick={ event => this.handleSubmit(event)}>SUBMIT</button>
       </form>
     )
   }
