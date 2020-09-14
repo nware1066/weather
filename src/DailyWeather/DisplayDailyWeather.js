@@ -8,11 +8,11 @@ import './DailyWeather.css';
         <article className='DisplayDailyWeather'>
         <h1>City: {props.weather.name}</h1>
         <p>Temp: {props.weather.main.temp}</p>
-        <p>Skies: {props.weather.weather.[0].description}</p>
+        <p>Skies: {props.weather.weather[0].description}</p>
         </article>
       )
     } else {
-      return ''
+      return null
     }
 }
 

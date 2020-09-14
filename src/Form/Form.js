@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchCurrentWeather } from '../ApiCalls/ApiCalls'
+import { fetchCurrentWeather, fetchWeatherForcast} from '../ApiCalls/ApiCalls'
 import './Form.css';
 
 class Form extends Component {
@@ -16,10 +16,21 @@ class Form extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.submitCurrentWeather();
+    this.submitWeatherForcast();
+  }
+
+  submitCurrentWeather = () => {
     const promise = fetchCurrentWeather(this.state.city);
     promise.then(weather => this.props.updateWeather(weather))
-    // promise.then(weather => props.updateWeather(weather));
   }
+
+  submitWeatherForcast = () => {
+    const promise = fetchWeatherForcast(this.state.city);
+    promise.then(forcast => this.props.updateForcast(forcast))
+  }
+
+  // refactor to DRY code for submit functions
 
   render() {
     return (
